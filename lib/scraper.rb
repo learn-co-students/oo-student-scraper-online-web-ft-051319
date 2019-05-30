@@ -30,15 +30,25 @@ class Scraper
     html=open(profile_url) #this is open-uri that we need to use to access the html
     profile_page=Nokogiri::HTML(File.read(html)) #take the string of HTML returned by open-uri's open method
     #and convert it into a NodeSet (aka, a bunch of nested "nodes")
-    binding.pry
-    hash={
-      twitter: profile_page.css("div.social-icon-container :nth-child(1n)").attribute("href").value,
-      linkedin: profile_page.css("div.social-icon-container :nth-child(2n)").attribute("href").value,
-      github: profile_page.css("div.social-icon-container :nth-child(3n)").attribute("href").value,
-      blog: ,
-      profile_quote: profile_page.css("div.profile-quote").text,
-      bio: profile_page.css("div.description-holder p").text
-    }
+    hash={}
+    social_links=profile_page.css("div.social-icon-container a").map{|i| i.attribute("href").value}
+    #creating an array of all social links, which fall under the <div class=social-icon-container> container
+    #this container contains up to four children, and each have the format of <a href="xxx.com"> so that's why we're retrieving
+    #the values to get the links
+    social_links.each do |i|
+      if i.include?("twitter")
+        hash[:twitter]=i
+      elsif i.include?("linkedin")
+        hash[:linkedin]=i
+      elsif i.include?("github")
+        hash[:github]=i
+      else
+        hash[:blog]=i #if the link does not contain any of the above strings, then it must be a blog
+      end
+    end
+    hash[:profile_quote]= profile_page.css("div.profile-quote").text
+    hash[:bio]= profile_page.css("div.description-holder p").text
+    hash
   end
 
 end
