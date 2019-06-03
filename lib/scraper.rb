@@ -6,10 +6,6 @@ class Scraper
   attr_accessor :attribute_hash
   @@students = []
 
-  def self.students
-    @@students
-  end
-
   def self.scrape_index_page(index_url)
     html = open(index_url)
     index_page = Nokogiri::HTML(html)
