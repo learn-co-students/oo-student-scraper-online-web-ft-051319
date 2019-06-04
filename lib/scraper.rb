@@ -35,7 +35,7 @@ class Scraper
     # linkedin =  doc.css(".social-icon-container").css("a")[1].attr("href")
     # github =  doc.css(".social-icon-container").css("a")[2].attr("href")
     # blog url =  doc.css(".social-icon-container").css("a")[3].attr("href")
-
+    # profile quote = doc.css(".vitals-text-container .profile-quote").text
 
 
 
@@ -49,7 +49,6 @@ class Scraper
     # bio:
 
   end
-  Scraper.scrape_index_page("./fixtures/student-site/students/eric-chu.html")
 
 
 end
