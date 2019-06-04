@@ -36,17 +36,21 @@ class Scraper
     attributes = {}
     doc.css("div.social-icon-container a").each do |social_media|
       case social_media
+        binding.pry
       when /twitter/
         attributes[:twitter] = social_media.attribute("href").value
+
       when /linkedin/
         attributes[:linkedin] = social_media.attribute("href").value
       when /github/
         attributes[:github] = social_media.attribute("href").value
       else
         attributes[:blog] = social_media.attribute("href").value
+
       end
+
       attributes[:profile_quote] = doc.css("div.profile-quote").text
-      attributes[:bio] = doc.css("div.bio-content div.description-holder p").text.strip
+      attributes[:bio] = doc.css("div.bio-content div.description-holder p").text
     end
     attributes
   end
