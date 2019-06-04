@@ -28,45 +28,24 @@ class Scraper
 
   end
 
-    Scraper.scrape_index_page("./fixtures/student-site/index.html")
-
   def self.scrape_profile_page(profile_url)
     html = open(profile_url)
     doc = Nokogiri::HTML(html)
     attributes = {}
-    doc.css("div.social-icon-container a").each do |social_media|
-      case social_media
-        binding.pry
-      when /twitter/
-        attributes[:twitter] = social_media.attribute("href").value
-
-      when /linkedin/
-        attributes[:linkedin] = social_media.attribute("href").value
-      when /github/
-        attributes[:github] = social_media.attribute("href").value
-      else
-        attributes[:blog] = social_media.attribute("href").value
-
+    social_media = doc.css("div.social-icon-container a").collect{|site| site.attribute("href").value}
+      social_media.each do |link|
+        if link.include?("twitter")
+          attributes[:twitter] = link
+        elsif link.include?("linkedin")
+          attributes[:linkedin] = link
+        elsif link.include?("github")
+        attributes[:github] = link
+      elsif link.include?(".com")
+        attributes[:blog] = link
       end
-
-      attributes[:profile_quote] = doc.css("div.profile-quote").text
-      attributes[:bio] = doc.css("div.bio-content div.description-holder p").text
     end
+    attributes[:profile_quote] = doc.css("div.profile-quote").text
+    attributes[:bio] = doc.css("div.bio-content div.description-holder p").text
     attributes
-  end
-      # twitter url: doc.css("div.social-icon-container a").attr("href").value
-    # linkedin url: doc.css("div.social-icon-container a")attr("href").value
-    # github url:  doc.css("div.social-icon-container a").attr("href").value
-    # blog url : doc.css("div.social-icon-container a").attr("href").value
-    # profile quote :doc.css("div.profile-quote").text
-    #bio : doc.css("div.description-holder p").text
-
-
-
-
-
-
-
-
-    Scraper.scrape_profile_page("./fixtures/student-site/students/joe-burgess.html")
+end
 end
