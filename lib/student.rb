@@ -4,7 +4,7 @@ require 'pry'
 
 class Student
 
-  attr_accessor :name, :location, :twitter, :linkedin, :github, :blog, :profile_quote, :bio, :profile_url
+  attr_accessor :name, :location, :twitter, :linkedin, :github, :blog, :facebook, :profile_quote, :bio, :profile_url
 
   @@all = []
 
@@ -27,10 +27,13 @@ class Student
       # self.send("#{key}=", "#{val}")
       # end
     end
-    self
+    #self
   end
   def add_student_attributes(attributes_hash)
-      attributes_hash.each {|key, val| self.send("#{key}=", "#{val}")}
+      attributes_hash.each do |key, val|
+    #    binding.pry
+        self.send("#{key}=", "#{val}")
+      end
 
 
   end

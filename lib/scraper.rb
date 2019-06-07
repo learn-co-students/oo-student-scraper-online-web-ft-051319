@@ -80,6 +80,9 @@ class Scraper
           # binding.pry
           if socmed_picname.include?("github")
             socmed_type=:github
+          elsif socmed_picname.include?("facebook")
+            socmed_type= :facebook
+            # puts "FB: #{socmed_type}"
           elsif socmed_picname.include?("twitter")
             socmed_type=:twitter
           elsif socmed_picname.include?("linkedin")
