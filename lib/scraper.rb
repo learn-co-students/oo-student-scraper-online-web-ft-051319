@@ -7,7 +7,7 @@ class Scraper
     doc = Nokogiri::HTML(open(index_url))
     roster = []
     
-    doc.css("div.student-car").each do |student|
+    doc.css("div.student-card").each do |student|
       student_hash = {}
       student_hash[:name] = student.css("h4").text
       student_hash[:location] = student.css("p").text
