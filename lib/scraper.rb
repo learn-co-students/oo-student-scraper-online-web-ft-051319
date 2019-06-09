@@ -21,6 +21,7 @@ class Scraper
     student_info = {}
     
     link = doc.css("div.social-icon-container a").attribute("href").value
+    binding.pry
     if link.include?("twitter") == true
       student_info[:twitter] = link
     elsif link.include?("linkedin") == true
@@ -44,6 +45,7 @@ class Scraper
     # student_info[:github] = 
     # student_info[:blog] = 
     # student_info[:profile_quote] =
+    student_info
     
   end
 
