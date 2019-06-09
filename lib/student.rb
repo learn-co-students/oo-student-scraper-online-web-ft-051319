@@ -20,7 +20,7 @@ class Student
   end
 
   def self.create_from_collection(students_array)
-    
+    students_array.each {|student| self.new(student)}
   end
 
   def add_student_attributes(attributes_hash)
@@ -28,7 +28,7 @@ class Student
   end
 
   def self.all
-    
+    @@all
   end
 end
 
