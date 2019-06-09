@@ -5,15 +5,17 @@ class Scraper
 
   def self.scrape_index_page(index_url)
     doc = Nokogiri::HTML(open(index_url))
-    roster = {}
+    roster = []
     
     doc.css("div.student-car").each do |student|
-      roster[:name] = student.css("h4").text
-      roster[:location] = student.css("p").text
-      roster[:profile_url] = student.css("a")[0].attribute("href").value
+      student_hash = {}
+      student_hash[:name] = student.css("h4").text
+      student_hash[:location] = student.css("p").text
+      student_hash[:profile_url] = student.css("a")[0].attribute("href").value
+      roster << student_hash
     end
-  
-    # {name: , location: , profile_url: }
+    roster
+    
     
   end
 
