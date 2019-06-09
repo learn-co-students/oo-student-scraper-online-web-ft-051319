@@ -11,6 +11,7 @@ class Scraper
       roster[:name] = student.css("h4").text
       roster[:location] = student.css("p").text
       roster[:profile_url] = student.css("a")[0].attribute("href").value
+    end
   
     # {name: , location: , profile_url: }
     
