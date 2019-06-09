@@ -20,13 +20,15 @@ class Scraper
     
     binding.pry 
     
-    student_info = {}
-    student_info[:linkedin] = doc.css()
-    student_info[:github] = 
-    student_info[:blog]
-    student_info[:blog][:profile_quote]
+    # student_info = {}
+    # student_info[:linkedin] = doc.css()
+    # student_info[:github] = 
+    # student_info[:blog] = 
+    # student_info[:profile_quote] =
     
   end
+
+  
 
 end
 
