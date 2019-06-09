@@ -20,37 +20,20 @@ class Scraper
     
     student_info = {}
     
-    link = doc.css("div.social-icon-container a").attribute("href").value
-    binding.pry
-    if link.include?("twitter") == true
-      student_info[:twitter] = link
-    elsif link.include?("linkedin") == true
-      student_info[:linkedin] = link
-    elsif link.include?("github") == true
-      student_info[:github] = link
-    else
-      student_info[:blog] = link
+    doc.css("div.social-icon-container a").each do |link_data| 
+      link = link_data.attribute("href").value
+      if link.include?("twitter") == true
+        student_info[:twitter] = link
+      elsif link.include?("linkedin") == true
+        student_info[:linkedin] = link
+      elsif link.include?("github") == true
+        student_info[:github] = link
+      else
+        student_info[:blog] = link
+      end
     end
-      
-   
-    # doc.css("div.social-icon-container a img")each_with_index
-    
-    
-    
-    # if doc.css("div.social-icon-container a img") include?(http://178.128.14.28:58884/fixtures/student-site/assets/img/twitter-icon.png)
-    # end
-    
-   
-    # student_info[:linkedin] = doc.css()
-    # student_info[:github] = 
-    # student_info[:blog] = 
-    # student_info[:profile_quote] =
+    student_info[:profile_quote] = doc.css("div.profile-quote").text
+    student_info[:bio] = doc.css("p").text
     student_info
-    
   end
-
-  
-
 end
-
-# doc.css("div.social-icon-container a").attribute("href").value 
