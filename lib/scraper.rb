@@ -37,3 +37,4 @@ class Scraper
     student_info
   end
 end
+
